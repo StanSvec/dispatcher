@@ -16,13 +16,13 @@ import java.lang.reflect.Method;
  * Time: 19:01
  * To change this template use File | Settings | File Templates.
  */
-public class InvocationToDispatch implements InvocationHandler {
+public class DispatchInvocation implements InvocationHandler {
 
     private final Dispatch dispatch;
 
     private final CallMetadata metadata;
 
-    public InvocationToDispatch(Dispatch dispatch, CallMetadata metadata) {
+    public DispatchInvocation(Dispatch dispatch, CallMetadata metadata) {
         this.dispatch = dispatch;
         this.metadata = metadata;
     }

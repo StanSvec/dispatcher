@@ -2,6 +2,15 @@ package com.trioptimum.shodan.common.internal;
 
 import java.lang.reflect.Method;
 
+/**
+ * Implements data for {@link com.trioptimum.shodan.common.internal.CallablePoint} implementations. The hashcode, equals
+ * and toString methods are intended to be common for all implementation. Therefore do not add any data properties in
+ * the subclasses. That way the subclasses also stay immutable.
+ *
+ * @author Stan Svec
+ * @since 0.1
+ *
+ */
 public abstract class AbstractCallablePoint implements CallablePoint {
 
 	public abstract Object call(Object... params) throws Exception;
@@ -47,4 +56,12 @@ public abstract class AbstractCallablePoint implements CallablePoint {
 		
 		return false;
 	}
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " {" +
+                "method=" + method +
+                ", instance=" + instance +
+                '}';
+    }
 }

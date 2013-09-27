@@ -39,18 +39,18 @@ public class LookupByRulesTest {
     }
 
     static CallablePoint getBinding(Bindings bindings) {
-        return bindings.getBindings().get(0);
+        return bindings.getCallablePoints().get(0);
     }
 
     void assertBinding(Bindings bs) {
-        assertThat(bs.getBindings()).hasSize(1);
+        assertThat(bs.getCallablePoints()).hasSize(1);
         assertThat(bs.getKey()).isEqualTo(call);
         assertThat(getBinding(bs).getInstance()).isEqualTo(destination);
         assertThat(getBinding(bs).getMethod()).isEqualTo(TestDestination.integerArgVoidMethod());
     }
 
     static void assertNoBinding(Bindings bs) {
-        assertThat(bs.getBindings()).isEmpty();
+        assertThat(bs.getCallablePoints()).isEmpty();
     }
 
     @Test(expectedExceptions = NullPointerException.class)

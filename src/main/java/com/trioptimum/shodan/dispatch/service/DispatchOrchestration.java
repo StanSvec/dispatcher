@@ -27,7 +27,7 @@ public abstract class DispatchOrchestration implements ManualDispatch {
 	}
 	
 	public Object dispatch(Key key, Object... params) throws Exception {
-        List<CallablePoint> cps = find(key).getBindings();
+        List<CallablePoint> cps = find(key).getCallablePoints();
         List<ParameterizedCallablePoint> pcps = new ArrayList<ParameterizedCallablePoint>(cps.size());
         for (CallablePoint cp : cps) {
             pcps.add(new ParameterizedCallablePoint(cp).setParameters(params));

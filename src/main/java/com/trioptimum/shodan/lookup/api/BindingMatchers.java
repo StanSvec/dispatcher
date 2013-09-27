@@ -48,14 +48,14 @@ public class BindingMatchers {
         }
 
         public boolean matches(Binding tested) {
-            return destinationMatcher.matches(tested.getDestination());
+            return destinationMatcher.matches(tested.getCallablePoint());
         }
     }
 
     public static class CompatibleParamsMatcher implements Matcher<Binding> {
 
         public boolean matches(Binding tested) {
-            Class<?>[] destParamTypes = tested.getDestination().getMethod().getParameterTypes();
+            Class<?>[] destParamTypes = tested.getCallablePoint().getMethod().getParameterTypes();
             if (destParamTypes.length == 0) {
                 return false;
             }

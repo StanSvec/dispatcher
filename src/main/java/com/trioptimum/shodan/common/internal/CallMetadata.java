@@ -20,7 +20,7 @@ public class CallMetadata {
         this.markers = markers;
     }
 
-    public static CallMetadata getNullObject() {
+    public static CallMetadata createNullObject() {
         return new CallMetadata(null, new Annotation[0]);
     }
 

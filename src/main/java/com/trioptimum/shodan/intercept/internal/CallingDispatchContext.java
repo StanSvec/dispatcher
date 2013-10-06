@@ -9,6 +9,6 @@ public final class CallingDispatchContext extends DispatchContext {
 	}
 
 	public Object call() throws Exception {
-        return binding.invoke();
+        return binding.call();
     }
 }

@@ -48,7 +48,7 @@ public class CallMatchers {
         }
 
         public boolean matches(Call tested) {
-            return listMatcher.matches(Arrays.asList(tested.getParameters()));
+            return listMatcher.matches(tested.getParameters());
         }
     }
 

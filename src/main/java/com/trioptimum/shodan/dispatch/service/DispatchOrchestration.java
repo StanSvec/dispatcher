@@ -1,9 +1,6 @@
 package com.trioptimum.shodan.dispatch.service;
 
-import com.trioptimum.shodan.common.internal.CallablePoint;
-import com.trioptimum.shodan.common.internal.DispatchResult;
-import com.trioptimum.shodan.common.internal.ParameterizedCallablePoint;
-import com.trioptimum.shodan.common.internal.Return;
+import com.trioptimum.shodan.common.internal.*;
 import com.trioptimum.shodan.lookup.api.Key;
 
 import java.util.ArrayList;
@@ -30,7 +27,7 @@ public abstract class DispatchOrchestration implements ManualDispatch {
         List<CallablePoint> cps = find(key).getCallablePoints();
         List<ParameterizedCallablePoint> pcps = new ArrayList<ParameterizedCallablePoint>(cps.size());
         for (CallablePoint cp : cps) {
-            pcps.add(new ParameterizedCallablePoint(cp).setParameters(params));
+            pcps.add(new DelegatingParameterizedCallablePoint(cp).setParameters(params));
         }
 
         return dispatchFound(pcps);

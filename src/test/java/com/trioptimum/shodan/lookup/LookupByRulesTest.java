@@ -28,8 +28,8 @@ public class LookupByRulesTest {
 
     TestDestination destination = new TestDestination();
 
-    final Key call = new Key(new Call(new CallablePointUsingReflection(TestDelegateMethods.integerArgVoidMethod(), new TestDelegateImpl()),
-                                      new Object[]{DelegationTest.PARAM},
+    final Key call = new Key(new Call(new ReflectiveCallablePoint(TestDelegateMethods.integerArgVoidMethod(), new TestDelegateImpl()),
+                                      Collections.singletonList(DelegationTest.PARAM),
                                       new CallMetadataBuilder().setSource(TestSource.class).setMarkers(DelegationTest.TEST_ANNOTATION).build()));
 
     void setup(LookupRule lookupRule) {

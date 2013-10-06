@@ -1,7 +1,6 @@
 package com.trioptimum.shodan.common.internal;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,10 +18,6 @@ public final class Call {
 	private final List<Object> parameters;
 
     private final CallMetadata metadata;
-
-    public Call(CallablePoint target, Object[] parameters, CallMetadata metadata) {
-        this(target, Arrays.asList(parameters), metadata);
-    }
 
     public Call(CallablePoint target, List<?> parameters, CallMetadata metadata) {
         this.target = target;

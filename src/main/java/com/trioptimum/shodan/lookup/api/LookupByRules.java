@@ -118,8 +118,8 @@ public final class LookupByRules implements StoringLookup {
 
 	private void assignToRules(boolean weakly, Object recipient) {
 		for (Method method : recipient.getClass().getMethods()) {
-			CallablePoint cp = weakly ? new WeakCallablePointUsingReflection(method, recipient, queue)
-							   : new CallablePointUsingReflection(method, recipient);
+			CallablePoint cp = weakly ? new WeakReflectiveCallablePoint(method, recipient, queue)
+							   : new ReflectiveCallablePoint(method, recipient);
 			for (Map.Entry<LookupRule, Set<CallablePoint>> entry : destinationsOfRuleMap.entrySet()) {
 				if (entry.getKey().getDestinationMatcher().matches(cp)) {
 					Set<CallablePoint> cps = entry.getValue();
@@ -180,8 +180,8 @@ public final class LookupByRules implements StoringLookup {
 					continue;
 				}
                 for (CallablePoint cp : entry.getValue()) {
-                    if (cp instanceof WeakCallablePointUsingReflection) {
-						cp = ((WeakCallablePointUsingReflection) cp).getStrong();
+                    if (cp instanceof WeakCallablePoint) {
+						cp = ((WeakCallablePoint) cp).createStrong();
 						if (cp == null) {
 							continue;
 						}

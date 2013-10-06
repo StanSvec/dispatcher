@@ -23,7 +23,7 @@ public final class InterceptionByRule implements Interception {
 		DispatchContext current = context;
 		for (ListIterator<InterceptionRule> it = interceptionRules.listIterator(interceptionRules.size()); it.hasPrevious();) {
 			InterceptionRule rule = it.previous();
-			if (rule.getCallDestinationMatcher().matches(context.getBinding().getCallablePoint())) {
+			if (rule.getCallDestinationMatcher().matches(context.getBinding())) {
 				current = new InterceptedDispatchContext(rule.getInterception(), current);
 			}
 		}

@@ -3,11 +3,10 @@ package com.trioptimum.shodan.common.internal;
 import java.lang.annotation.Annotation;
 
 /**
- * Created with IntelliJ IDEA.
- * User: trtl
- * Date: 2/20/13
- * Time: 5:39 PM
- * To change this template use File | Settings | File Templates.
+ * The additional information about executed call.
+ *
+ * @author Stan Svec
+ * @since 0.1
  */
 public class CallMetadata {
 

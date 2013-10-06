@@ -8,6 +8,8 @@ import com.trioptimum.shodan.lookup.api.Key;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Created with IntelliJ IDEA.
@@ -41,6 +43,6 @@ public class DispatchInvocation implements InvocationHandler {
             }
         }
 
-        return dispatch.dispatch(new Key(new Call(new ProxyCallablePoint(method, proxy, this), args, metadata)), args);
+        return dispatch.dispatch(new Key(new Call(new ProxyCallablePoint(method, proxy, this), (args != null) ? Arrays.asList(args) : Collections.EMPTY_LIST, metadata)), args);
     }
 }

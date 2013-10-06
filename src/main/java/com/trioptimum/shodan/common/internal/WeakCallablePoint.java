@@ -4,11 +4,15 @@ import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 
-public class WeakCallablePoint extends WeakReference<Object> implements CallablePoint {
+public abstract class WeakCallablePoint extends WeakReference<Object> implements CallablePoint {
 
 	protected final Method method;
 
 	protected final int hash;
+
+    protected abstract Object callSafely(Object instance, Object... params) throws Exception;
+
+    public abstract CallablePoint createStrong();
 
 	public WeakCallablePoint(Method method, Object instance, ReferenceQueue<Object> queue) {
 		super(instance, queue);
@@ -31,10 +35,6 @@ public class WeakCallablePoint extends WeakReference<Object> implements Callable
 		}
 
 		return callSafely(instance, params);
-	}
-	
-	protected Object callSafely(Object instance, Object... params) throws Exception {
-		throw new UnsupportedOperationException("Call operation is unsupported");
 	}
 
 	@Override

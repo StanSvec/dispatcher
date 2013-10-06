@@ -1,40 +1,14 @@
 package com.trioptimum.shodan.common.internal;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
- * Created with IntelliJ IDEA.
- * User: trtl
- * Date: 2/24/13
- * Time: 4:40 PM
- * To change this template use File | Settings | File Templates.
+ * Created by trtles on 10/6/13.
  */
-public class ParameterizedCallablePoint {
+public interface ParameterizedCallablePoint extends CallablePoint, Callable<Object> {
 
-    private final CallablePoint callablePoint;
+    List<Object> getParameters();
 
-    private List<Object> parameters;
-
-    public ParameterizedCallablePoint(CallablePoint callablePoint) {
-        this.callablePoint = callablePoint;
-    }
-
-    public CallablePoint getCallablePoint() {
-        return callablePoint;
-    }
-
-    public List<Object> getParameters() {
-        return parameters;
-    }
-
-    public ParameterizedCallablePoint setParameters(Object... parameters) {
-        this.parameters = (parameters != null) ? Arrays.asList(parameters.clone()) : Collections.EMPTY_LIST;
-        return this;
-    }
-
-    public Object invoke() throws Exception {
-        return callablePoint.call(parameters.toArray());
-    }
+    ParameterizedCallablePoint setParameters(Object... parameters);
 }

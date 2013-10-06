@@ -6,6 +6,7 @@ import com.trioptimum.shodan.common.internal.CallablePoint;
 import com.trioptimum.shodan.lookup.api.Key;
 
 import java.lang.reflect.Method;
+import java.util.Collections;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,7 +38,7 @@ public class TestBindings {
         }
 
         public Binding to(CallablePoint newTarget) {
-            return new Binding(new Key(new Call(target, null)), newTarget);
+            return new Binding(new Key(new Call(target, Collections.emptyList(), null)), newTarget);
         }
     }
 }

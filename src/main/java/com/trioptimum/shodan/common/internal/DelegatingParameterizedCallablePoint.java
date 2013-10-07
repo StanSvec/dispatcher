@@ -17,7 +17,7 @@ public final class DelegatingParameterizedCallablePoint implements Parameterized
 
     public DelegatingParameterizedCallablePoint(CallablePoint callablePoint, List<?> parameters) {
         this.callablePoint = callablePoint;
-        this.parameters = (parameters != null) ? Collections.unmodifiableList(new ArrayList<Object>(parameters)) : Collections.EMPTY_LIST;
+        this.parameters = (parameters != null) ? Collections.unmodifiableList(new ArrayList<Object>(parameters)) : Collections.emptyList();
     }
 
     public Method getMethod() {

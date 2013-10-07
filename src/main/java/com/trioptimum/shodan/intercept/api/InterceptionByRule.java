@@ -1,7 +1,8 @@
 package com.trioptimum.shodan.intercept.api;
 
+import com.trioptimum.shodan.common.internal.ParameterizedCallablePoint;
 import com.trioptimum.shodan.intercept.internal.DispatchContext;
-import com.trioptimum.shodan.intercept.internal.InterceptedDispatchContext;
+import com.trioptimum.shodan.intercept.internal.InterceptedCallablePoint;
 import com.trioptimum.shodan.intercept.service.Interception;
 import com.trioptimum.shodan.intercept.service.InterceptionRule;
 
@@ -15,12 +16,12 @@ public final class InterceptionByRule implements Interception {
         this.interceptionRules = new ArrayList<InterceptionRule>(rules);
     }
 
-	public Object intercept(DispatchContext context) throws Exception {
-		DispatchContext current = context;
+	public Object intercept(DispatchContext context, ParameterizedCallablePoint callablePoint) throws Exception {
+        ParameterizedCallablePoint current = callablePoint;
 		for (ListIterator<InterceptionRule> it = interceptionRules.listIterator(interceptionRules.size()); it.hasPrevious();) {
 			InterceptionRule rule = it.previous();
-			if (rule.getDestinationMatcher().matches(context)) {
-				current = new InterceptedDispatchContext(rule.getInterception(), current);
+			if (rule.getDestinationMatcher().matches(callablePoint)) {
+				current = new InterceptedCallablePoint(rule.getInterception(), context, current);
 			}
 		}
 		

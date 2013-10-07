@@ -19,5 +19,6 @@ public class TestSettings extends AbstractSettings {
     @Override
     protected void configure() {
         bind(method(annotation(Deprecated.class))).when(binding(compatibleParams()));
+        intercept(new TestInterception());
     }
 }

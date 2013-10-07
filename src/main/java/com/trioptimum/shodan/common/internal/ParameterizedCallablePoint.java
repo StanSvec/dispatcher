@@ -9,6 +9,4 @@ import java.util.concurrent.Callable;
 public interface ParameterizedCallablePoint extends CallablePoint, Callable<Object> {
 
     List<Object> getParameters();
-
-    ParameterizedCallablePoint setParameters(Object... parameters);
 }

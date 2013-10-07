@@ -1,22 +1,23 @@
 package com.trioptimum.shodan.common.internal;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Default implementation of {@link com.trioptimum.shodan.common.internal.ParameterizedCallablePoint}. The implementation
- * isn't thread safe. The instances are supposed to be confined to a thread.
+ * Default implementation of {@link com.trioptimum.shodan.common.internal.ParameterizedCallablePoint}.
  */
 public final class DelegatingParameterizedCallablePoint implements ParameterizedCallablePoint {
 
     private final CallablePoint callablePoint;
 
-    private List<Object> parameters;
+    private final List<Object> parameters;
 
-    public DelegatingParameterizedCallablePoint(CallablePoint callablePoint) {
+    public DelegatingParameterizedCallablePoint(CallablePoint callablePoint, List<?> parameters) {
         this.callablePoint = callablePoint;
+        this.parameters = (parameters != null) ? Collections.unmodifiableList(new ArrayList<Object>(parameters)) : Collections.EMPTY_LIST;
     }
 
     public Method getMethod() {
@@ -32,11 +33,6 @@ public final class DelegatingParameterizedCallablePoint implements Parameterized
      */
     public List<Object> getParameters() {
         return parameters;
-    }
-
-    public DelegatingParameterizedCallablePoint setParameters(Object... parameters) {
-        this.parameters = (parameters != null) ? Collections.unmodifiableList(Arrays.asList(parameters.clone())) : Collections.EMPTY_LIST;
-        return this;
     }
 
     public Object call(Object... params) throws Exception {

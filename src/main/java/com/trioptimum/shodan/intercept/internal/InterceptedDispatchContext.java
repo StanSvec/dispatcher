@@ -9,7 +9,7 @@ public final class InterceptedDispatchContext extends DispatchContext {
 	private final DispatchContext context;
 	
 	public InterceptedDispatchContext(Interception interception, DispatchContext context) {
-		super(context.getBinding());
+		super(context);
 		this.interception = interception;
 		this.context = context;
 	}
@@ -17,4 +17,8 @@ public final class InterceptedDispatchContext extends DispatchContext {
 	public Object call() throws Exception {
 		return interception.intercept(context);
 	}
+
+    public Object call(Object... params) throws Exception {
+        return null;
+    }
 }

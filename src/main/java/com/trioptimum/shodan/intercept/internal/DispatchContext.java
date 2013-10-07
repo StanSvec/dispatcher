@@ -2,23 +2,32 @@ package com.trioptimum.shodan.intercept.internal;
 
 import com.trioptimum.shodan.common.internal.ParameterizedCallablePoint;
 
-import java.util.concurrent.Callable;
+import java.lang.reflect.Method;
+import java.util.List;
 
-public abstract class DispatchContext implements Callable<Object> {
+public abstract class DispatchContext implements ParameterizedCallablePoint {
 	
-	protected final ParameterizedCallablePoint binding;
+	protected final ParameterizedCallablePoint callablePoint;
 
 	protected boolean lastDispatch;
 
-	public DispatchContext(ParameterizedCallablePoint binding) {
-		this.binding = binding;
+	public DispatchContext(ParameterizedCallablePoint callablePoint) {
+		this.callablePoint = callablePoint;
 	}
 
-	public ParameterizedCallablePoint getBinding() {
-		return binding;
-	}
+    public Method getMethod() {
+        return callablePoint.getMethod();
+    }
 
-	public boolean isLastDispatch() {
+    public Object getInstance() {
+        return callablePoint.getInstance();
+    }
+
+    public List<Object> getParameters() {
+        return callablePoint.getParameters();
+    }
+
+    public boolean isLastDispatch() {
 		return lastDispatch;
 	}
 

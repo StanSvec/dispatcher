@@ -3,7 +3,7 @@ package com.trioptimum.shodan.common.internal;
 import com.trioptimum.shodan.lookup.api.Key;
 
 /**
- * The binding of a key to a callable point.
+ * The callablePoint of a key to a callable point.
  *
  * @author Stan Svec
  * @since 0.1

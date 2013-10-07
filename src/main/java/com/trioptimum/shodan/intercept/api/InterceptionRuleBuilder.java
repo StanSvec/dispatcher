@@ -44,7 +44,7 @@ public final class InterceptionRuleBuilder {
 			return interception;
 		}
 		
-		public Matcher<? super CallablePoint> getCallDestinationMatcher() {
+		public Matcher<? super CallablePoint> getDestinationMatcher() {
 			return callDestinationMatcher;
 		}
 	}

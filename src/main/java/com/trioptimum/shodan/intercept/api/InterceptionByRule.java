@@ -11,10 +11,6 @@ public final class InterceptionByRule implements Interception {
 
 	private final List<InterceptionRule> interceptionRules;
 
-    public InterceptionByRule(InterceptionRule... rules) {
-        this(Arrays.asList(rules));
-    }
-
     public InterceptionByRule(Collection<? extends InterceptionRule> rules) {
         this.interceptionRules = new ArrayList<InterceptionRule>(rules);
     }
@@ -23,7 +19,7 @@ public final class InterceptionByRule implements Interception {
 		DispatchContext current = context;
 		for (ListIterator<InterceptionRule> it = interceptionRules.listIterator(interceptionRules.size()); it.hasPrevious();) {
 			InterceptionRule rule = it.previous();
-			if (rule.getCallDestinationMatcher().matches(context.getBinding())) {
+			if (rule.getDestinationMatcher().matches(context)) {
 				current = new InterceptedDispatchContext(rule.getInterception(), current);
 			}
 		}

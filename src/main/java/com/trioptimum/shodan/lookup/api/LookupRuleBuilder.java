@@ -4,7 +4,7 @@ import com.trioptimum.shodan.common.internal.CallablePoint;
 import com.trioptimum.shodan.lookup.internal.BindingContext;
 import com.trioptimum.shodan.lookup.service.LookupRule;
 import com.trioptimum.shodan.matcher.api.BasicMatchers;
-import com.trioptimum.shodan.matcher.internal.CallMatcherCrate;
+import com.trioptimum.shodan.matcher.internal.KeyMatcherCrate;
 import com.trioptimum.shodan.matcher.service.Matcher;
 
 import java.lang.reflect.Method;
@@ -50,7 +50,7 @@ public final class LookupRuleBuilder {
 		return new LookupRuleImpl(this);
 	}
 	
-	private static class LookupRuleImpl extends CallMatcherCrate implements LookupRule {
+	private static class LookupRuleImpl extends KeyMatcherCrate implements LookupRule {
 
 		private final Matcher<? super CallablePoint> destinationMatcher;
 		

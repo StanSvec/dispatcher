@@ -13,8 +13,7 @@ import com.trioptimum.shodan.intercept.service.Interception;
 public class NullForMissingParams implements Interception {
 
     public Object intercept(DispatchContext context) throws Exception {
-        Object[] nulls = new Object[context.getBinding().getMethod().getParameterTypes().length];
-        context.getBinding().setParameters(nulls);
-        return context.call();
+        Object[] nulls = new Object[context.getMethod().getParameterTypes().length];
+        return context.call(nulls);
     }
 }

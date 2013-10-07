@@ -4,11 +4,15 @@ import com.trioptimum.shodan.common.internal.ParameterizedCallablePoint;
 
 public final class CallingDispatchContext extends DispatchContext {
 
-	public CallingDispatchContext(ParameterizedCallablePoint binding) {
-		super(binding);
+	public CallingDispatchContext(ParameterizedCallablePoint callablePoint) {
+		super(callablePoint);
 	}
 
 	public Object call() throws Exception {
-        return binding.call();
+        return callablePoint.call();
+    }
+
+    public Object call(Object... params) throws Exception {
+        return callablePoint.call(params);
     }
 }

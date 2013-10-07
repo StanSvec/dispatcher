@@ -13,7 +13,8 @@ public class WeakReflectiveCallablePoint extends WeakCallablePoint {
 	protected Object callSafely(Object instance, Object... params) throws Exception {
 		return new ReflectiveCallablePoint(method, instance).call(params);
 	}
-	
+
+    @Override
 	public CallablePoint createStrong() {
 		Object instance = getInstance();
 		return (instance != null) ? new ReflectiveCallablePoint(method, instance) : null;

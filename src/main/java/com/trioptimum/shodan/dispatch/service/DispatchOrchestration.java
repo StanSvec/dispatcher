@@ -3,9 +3,7 @@ package com.trioptimum.shodan.dispatch.service;
 import com.trioptimum.shodan.common.internal.*;
 import com.trioptimum.shodan.lookup.api.Key;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public abstract class DispatchOrchestration implements ManualDispatch {
 
@@ -27,7 +25,7 @@ public abstract class DispatchOrchestration implements ManualDispatch {
         List<CallablePoint> cps = find(key).getCallablePoints();
         List<ParameterizedCallablePoint> pcps = new ArrayList<ParameterizedCallablePoint>(cps.size());
         for (CallablePoint cp : cps) {
-            pcps.add(new DelegatingParameterizedCallablePoint(cp).setParameters(params));
+            pcps.add(new DelegatingParameterizedCallablePoint(cp, (params != null) ? Arrays.asList(params) : null));
         }
 
         return dispatchFound(pcps);

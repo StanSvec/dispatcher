@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The binding of a key to the list of callable points.
+ * The callablePoint of a key to the list of callable points.
  *
  * @author Stan Svec
  * @since 0.1

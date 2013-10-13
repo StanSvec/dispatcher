@@ -7,7 +7,9 @@ import java.util.*;
 
 public abstract class DispatchOrchestration implements ManualDispatch {
 
-    protected abstract DispatchResult invokeAll(Collection<? extends ParameterizedCallablePoint> bindings);
+    protected abstract Calling createCalling(CallablePoint callablePoint);
+
+    protected abstract DispatchResult invokeAll(Collection<? extends ParameterizedCalling> bindings);
 	
 	protected abstract Return extractReturn(DispatchResult dispatchResult);
 	
@@ -23,15 +25,15 @@ public abstract class DispatchOrchestration implements ManualDispatch {
 	
 	public Object dispatch(Key key, Object... params) throws Exception {
         List<CallablePoint> cps = find(key).getCallablePoints();
-        List<ParameterizedCallablePoint> pcps = new ArrayList<ParameterizedCallablePoint>(cps.size());
+        List<ParameterizedCalling> pcps = new ArrayList<ParameterizedCalling>(cps.size());
         for (CallablePoint cp : cps) {
-            pcps.add(new DelegatingParameterizedCallablePoint(cp, (params != null) ? Arrays.asList(params) : null));
+            pcps.add(new DelegatingParameterizedCalling(createCalling(cp), (params != null) ? Arrays.asList(params) : null));
         }
 
         return dispatchFound(pcps);
     }
 
-    public Object dispatchFound(Collection<? extends ParameterizedCallablePoint> bindings) throws Exception {
+    public Object dispatchFound(Collection<? extends ParameterizedCalling> bindings) throws Exception {
         DispatchResult res = invokeAll(bindings);
         Return ret = extractReturn(res);
         postProcess(res, ret);

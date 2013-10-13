@@ -28,7 +28,7 @@ public class LookupByRulesTest {
 
     TestDestination destination = new TestDestination();
 
-    final Key call = new Key(new Call(new ReflectiveCallablePoint(TestDelegateMethods.integerArgVoidMethod(), new TestDelegateImpl()),
+    final Key call = new Key(new Call(new StrongCallablePoint(TestDelegateMethods.integerArgVoidMethod(), new TestDelegateImpl()),
                                       Collections.singletonList(DelegationTest.PARAM),
                                       new CallMetadataBuilder().setSource(TestSource.class).setMarkers(DelegationTest.TEST_ANNOTATION).build()));
 

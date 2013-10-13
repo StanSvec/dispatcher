@@ -1,22 +1,22 @@
 package com.trioptimum.shodan.intercept.internal;
 
-import com.trioptimum.shodan.common.internal.DelegatingParameterizedCallablePoint;
-import com.trioptimum.shodan.common.internal.ParameterizedCallablePoint;
+import com.trioptimum.shodan.common.internal.DelegatingParameterizedCalling;
+import com.trioptimum.shodan.common.internal.ParameterizedCalling;
 import com.trioptimum.shodan.intercept.service.Interception;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
-public final class InterceptedCallablePoint implements ParameterizedCallablePoint {
+public final class InterceptedCalling implements ParameterizedCalling {
 
 	private final Interception interception;
 	
 	private final DispatchContext context;
 
-    private final ParameterizedCallablePoint callablePoint;
+    private final ParameterizedCalling callablePoint;
 
-    public InterceptedCallablePoint(Interception interception, DispatchContext context, ParameterizedCallablePoint callablePoint) {
+    public InterceptedCalling(Interception interception, DispatchContext context, ParameterizedCalling callablePoint) {
 		this.interception = interception;
 		this.context = context;
         this.callablePoint = callablePoint;
@@ -39,6 +39,6 @@ public final class InterceptedCallablePoint implements ParameterizedCallablePoin
 	}
 
     public Object call(Object... params) throws Exception {
-        return interception.intercept(context, new DelegatingParameterizedCallablePoint(callablePoint, params != null ? Arrays.asList(params) : null));
+        return interception.intercept(context, new DelegatingParameterizedCalling(callablePoint, params != null ? Arrays.asList(params) : null));
     }
 }

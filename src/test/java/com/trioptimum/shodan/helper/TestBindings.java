@@ -3,6 +3,7 @@ package com.trioptimum.shodan.helper;
 import com.trioptimum.shodan.common.internal.Binding;
 import com.trioptimum.shodan.common.internal.Call;
 import com.trioptimum.shodan.common.internal.CallablePoint;
+import com.trioptimum.shodan.common.internal.StrongCallablePoint;
 import com.trioptimum.shodan.lookup.api.Key;
 
 import java.lang.reflect.Method;
@@ -18,7 +19,7 @@ import java.util.Collections;
 public class TestBindings {
 
     public static TestBindingBuilder from(Method target) {
-        return from(new Tdcp(target, null));
+        return from(new StrongCallablePoint(target, null));
     }
 
     public static TestBindingBuilder from(CallablePoint target) {
@@ -34,7 +35,7 @@ public class TestBindings {
         }
 
         public Binding to(Method destination) {
-            return to(new Tdcp(destination, null));
+            return to(new StrongCallablePoint(destination, null));
         }
 
         public Binding to(CallablePoint newTarget) {

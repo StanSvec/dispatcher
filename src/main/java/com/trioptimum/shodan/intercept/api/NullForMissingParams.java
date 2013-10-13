@@ -1,6 +1,6 @@
 package com.trioptimum.shodan.intercept.api;
 
-import com.trioptimum.shodan.common.internal.ParameterizedCallablePoint;
+import com.trioptimum.shodan.common.internal.ParameterizedCalling;
 import com.trioptimum.shodan.intercept.internal.DispatchContext;
 import com.trioptimum.shodan.intercept.service.Interception;
 
@@ -13,7 +13,7 @@ import com.trioptimum.shodan.intercept.service.Interception;
  */
 public class NullForMissingParams implements Interception {
 
-    public Object intercept(DispatchContext context, ParameterizedCallablePoint callablePoint) throws Exception {
+    public Object intercept(DispatchContext context, ParameterizedCalling callablePoint) throws Exception {
         Object[] nulls = new Object[callablePoint.getMethod().getParameterTypes().length];
         // TODO implement
         return callablePoint.call(nulls);

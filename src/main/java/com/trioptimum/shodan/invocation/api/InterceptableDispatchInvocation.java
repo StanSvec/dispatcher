@@ -1,7 +1,7 @@
 package com.trioptimum.shodan.invocation.api;
 
 import com.trioptimum.shodan.common.internal.DispatchResult;
-import com.trioptimum.shodan.common.internal.ParameterizedCallablePoint;
+import com.trioptimum.shodan.common.internal.ParameterizedCalling;
 import com.trioptimum.shodan.common.internal.Return;
 import com.trioptimum.shodan.intercept.internal.DispatchContext;
 import com.trioptimum.shodan.intercept.internal.NullInterception;
@@ -24,10 +24,10 @@ public final class InterceptableDispatchInvocation implements DispatchInvocation
 		this.interception = interception;
 	}
 	
-	public DispatchResult invokeAll(Collection<? extends ParameterizedCallablePoint> callablePoints) {
+	public DispatchResult invokeAll(Collection<? extends ParameterizedCalling> callablePoints) {
 		List<Return> returns = new ArrayList<Return>(callablePoints.size());
         DispatchContext context = new DispatchContext();
-        for (ParameterizedCallablePoint pcp : callablePoints) {
+        for (ParameterizedCalling pcp : callablePoints) {
             Object retval = null;
             Exception ex = null;
 			try {

@@ -2,7 +2,7 @@ package com.trioptimum.shodan.delegate.internal;
 
 import com.trioptimum.shodan.common.internal.Call;
 import com.trioptimum.shodan.common.internal.CallMetadata;
-import com.trioptimum.shodan.common.internal.ProxyCallablePoint;
+import com.trioptimum.shodan.common.internal.StrongCallablePoint;
 import com.trioptimum.shodan.dispatch.service.Dispatch;
 import com.trioptimum.shodan.lookup.api.Key;
 
@@ -43,6 +43,6 @@ public class DispatchInvocation implements InvocationHandler {
             }
         }
 
-        return dispatch.dispatch(new Key(new Call(new ProxyCallablePoint(method, proxy, this), (args != null) ? Arrays.asList(args) : Collections.EMPTY_LIST, metadata)), args);
+        return dispatch.dispatch(new Key(new Call(new StrongCallablePoint(method, proxy), (args != null) ? Arrays.asList(args) : Collections.EMPTY_LIST, metadata)), args);
     }
 }

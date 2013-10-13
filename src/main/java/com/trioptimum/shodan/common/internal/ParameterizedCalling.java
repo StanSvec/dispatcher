@@ -6,7 +6,7 @@ import java.util.concurrent.Callable;
 /**
  * Created by trtles on 10/6/13.
  */
-public interface ParameterizedCallablePoint extends CallablePoint, Callable<Object> {
+public interface ParameterizedCalling extends Calling, Callable<Object> {
 
     List<Object> getParameters();
 }

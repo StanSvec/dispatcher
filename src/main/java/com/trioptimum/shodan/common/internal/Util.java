@@ -38,4 +38,27 @@ public class Util {
             throw new RuntimeException("Unsupported throwable subtype", throwable);
         }
     }
+
+    public static boolean callablePointEquals(CallablePoint cp, Object obj) {
+        if (cp == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (obj instanceof CallablePoint) {
+            CallablePoint other = (CallablePoint) obj;
+            return cp.getInstance() == other.getInstance()
+                    && Util.equals(cp.getMethod(), other.getMethod());
+        }
+
+        return false;
+    }
+
+    public static String callablePointToString(CallablePoint cp) {
+        return cp.getClass().getSimpleName() + " {" +
+                "method=" + cp.getMethod() +
+                ", instance=" + cp.getInstance() +
+                '}';
+    }
 }

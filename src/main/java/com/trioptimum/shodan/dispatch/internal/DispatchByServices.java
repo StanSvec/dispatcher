@@ -1,9 +1,6 @@
 package com.trioptimum.shodan.dispatch.internal;
 
-import com.trioptimum.shodan.common.internal.Bindings;
-import com.trioptimum.shodan.common.internal.DispatchResult;
-import com.trioptimum.shodan.common.internal.ParameterizedCallablePoint;
-import com.trioptimum.shodan.common.internal.Return;
+import com.trioptimum.shodan.common.internal.*;
 import com.trioptimum.shodan.common.service.Function;
 import com.trioptimum.shodan.dispatch.service.DispatchOrchestration;
 import com.trioptimum.shodan.extraction.internal.SimpleReturnExtraction;
@@ -20,15 +17,18 @@ public final class DispatchByServices extends DispatchOrchestration {
 
     private final Function<Key, Bindings> lookup;
 
+    private final Function<CallablePoint, Calling> callingFactory;
+
     private final DispatchInvocation invocation;
 
     private final Function<DispatchResult, Return> returnExtraction;
 
     private final DispatchPostProcessor postProcessor;
 
-    public DispatchByServices(Function<Key, Bindings> lookup, DispatchInvocation invocation,
+    public DispatchByServices(Function<Key, Bindings> lookup, Function<CallablePoint, Calling> callingFactory, DispatchInvocation invocation,
                               Function<DispatchResult, Return> returnExtraction, DispatchPostProcessor postProcessor) {
         this.lookup = 		    ((lookup != null) ? lookup : new NullLookup());
+        this.callingFactory =   ((callingFactory != null) ? callingFactory : new ReflectiveCallingFactory());
         this.invocation =       ((invocation != null) ? invocation : new InterceptableDispatchInvocation());
         this.returnExtraction = ((returnExtraction != null) ? returnExtraction : new SimpleReturnExtraction());
         this.postProcessor =    ((postProcessor != null) ? postProcessor : new NullDispatchPostProcessor());
@@ -39,7 +39,12 @@ public final class DispatchByServices extends DispatchOrchestration {
     }
 
     @Override
-    public DispatchResult invokeAll(Collection<? extends ParameterizedCallablePoint> bindings) {
+    protected Calling createCalling(CallablePoint callablePoint) {
+        return callingFactory.apply(callablePoint);
+    }
+
+    @Override
+    public DispatchResult invokeAll(Collection<? extends ParameterizedCalling> bindings) {
         return invocation.invokeAll(bindings);
     }
 

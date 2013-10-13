@@ -4,15 +4,11 @@ import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 
-public abstract class WeakCallablePoint extends WeakReference<Object> implements CallablePoint {
+public final class WeakCallablePoint extends WeakReference<Object> implements CallablePoint {
 
-	protected final Method method;
+	private final Method method;
 
-	protected final int hash;
-
-    protected abstract Object callSafely(Object instance, Object... params) throws Exception;
-
-    public abstract CallablePoint createStrong();
+	private final int hash;
 
 	public WeakCallablePoint(Method method, Object instance, ReferenceQueue<Object> queue) {
 		super(instance, queue);
@@ -28,34 +24,23 @@ public abstract class WeakCallablePoint extends WeakReference<Object> implements
 		return super.get();
 	}
 
-	public Object call(Object... params) throws Exception {
-		Object instance = getInstance();
-		if (instance == null) {
-			 throw new IllegalStateException("Instance unreachable");
-		}
+    public StrongCallablePoint createStrong() {
+        Object instance = getInstance();
+        return (instance != null) ? new StrongCallablePoint(method, instance) : null;
+    }
 
-		return callSafely(instance, params);
-	}
+    @Override
+    public int hashCode() {
+        return hash;
+    }
 
-	@Override
-	public int hashCode() {
-		return hash;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        return Util.callablePointEquals(this, obj);
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (obj instanceof CallablePoint) {
-			CallablePoint other = (CallablePoint) obj;
-			return getInstance() == other.getInstance()
-				   && Util.equals(method, other.getMethod());
-		}
-		
-		return false;
-	}
+    @Override
+    public String toString() {
+        return Util.callablePointToString(this);
+    }
 }

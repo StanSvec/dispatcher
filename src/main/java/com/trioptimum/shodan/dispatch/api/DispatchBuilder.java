@@ -1,8 +1,6 @@
 package com.trioptimum.shodan.dispatch.api;
 
-import com.trioptimum.shodan.common.internal.Bindings;
-import com.trioptimum.shodan.common.internal.DispatchResult;
-import com.trioptimum.shodan.common.internal.Return;
+import com.trioptimum.shodan.common.internal.*;
 import com.trioptimum.shodan.common.service.Function;
 import com.trioptimum.shodan.dispatch.internal.DispatchByServices;
 import com.trioptimum.shodan.dispatch.service.Dispatch;
@@ -14,6 +12,8 @@ public final class DispatchBuilder {
 
 	private Function<Key, Bindings> lookup;
 
+    private Function<CallablePoint, Calling> callingFactory;
+
 	private DispatchInvocation invocation;
 
 	private Function<DispatchResult, Return> returnExtraction;
@@ -24,6 +24,11 @@ public final class DispatchBuilder {
 		this.lookup = lookup;
 		return this;
 	}
+
+    public DispatchBuilder setCallingFactory(Function<CallablePoint, Calling> callingFactory) {
+        this.callingFactory = callingFactory;
+        return this;
+    }
 
 	public DispatchBuilder setInvocation(DispatchInvocation invocation) {
 		this.invocation = invocation;
@@ -41,6 +46,6 @@ public final class DispatchBuilder {
 	}
 
 	public Dispatch build() {
-		return new DispatchByServices(lookup, invocation, returnExtraction, postProcessor);
+		return new DispatchByServices(lookup, callingFactory, invocation, returnExtraction, postProcessor);
 	}
 }

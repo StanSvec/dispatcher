@@ -18,13 +18,13 @@ import java.util.Collections;
  * Time: 19:01
  * To change this template use File | Settings | File Templates.
  */
-public class DispatchInvocation implements InvocationHandler {
+public class CallDispatch implements InvocationHandler {
 
     private final Dispatch dispatch;
 
     private final CallMetadata metadata;
 
-    public DispatchInvocation(Dispatch dispatch, CallMetadata metadata) {
+    public CallDispatch(Dispatch dispatch, CallMetadata metadata) {
         this.dispatch = dispatch;
         this.metadata = metadata;
     }

@@ -33,8 +33,8 @@ public abstract class DispatchOrchestration implements ManualDispatch {
         return dispatchFound(pcps);
     }
 
-    public Object dispatchFound(Collection<? extends ParameterizedCalling> bindings) throws Exception {
-        DispatchResult res = invokeAll(bindings);
+    public Object dispatchFound(Collection<? extends ParameterizedCalling> callings) throws Exception {
+        DispatchResult res = invokeAll(callings);
         Return ret = extractReturn(res);
         postProcess(res, ret);
         return doReturn(ret);

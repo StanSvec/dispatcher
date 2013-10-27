@@ -11,5 +11,7 @@ import com.trioptimum.shodan.common.internal.CallMetadata;
  */
 public interface DelegateFactory {
 
+    <D> D createDelegate(Class<D> delegateClass);
+
     <D> D createDelegate(Class<D> delegateClass, CallMetadata metadata);
 }

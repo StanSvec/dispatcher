@@ -70,6 +70,10 @@ public class Shodan implements Delegation {
         return this;
     }
 
+    public <D> D createDelegate(Class<D> delegateClass) {
+        return createDelegate(delegateClass, null);
+    }
+
     public <D> D createDelegate(Class<D> delegateClass, CallMetadata metadata) {
         return delegateFactory.createDelegate(delegateClass, metadata);
     }

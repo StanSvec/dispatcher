@@ -1,5 +1,7 @@
-package com.trioptimum.shodan.common.internal;
+package com.trioptimum.shodan.lookup.internal;
 
+import com.trioptimum.shodan.common.internal.CallablePoint;
+import com.trioptimum.shodan.common.internal.Util;
 import com.trioptimum.shodan.lookup.api.Key;
 
 import java.util.ArrayList;
@@ -13,13 +15,13 @@ import java.util.List;
  * @since 0.1
  *
  */
-public final class Bindings {
+public final class LookupResult {
 
 	private final Key key;
 	
 	private final List<CallablePoint> callablePoints;
 
-	public Bindings(Key key, List<CallablePoint> callablePoints) {
+	public LookupResult(Key key, List<CallablePoint> callablePoints) {
 		this.key = key;
 		this.callablePoints = Collections.unmodifiableList(new ArrayList<CallablePoint>(callablePoints));
 	}
@@ -37,7 +39,7 @@ public final class Bindings {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Bindings b = (Bindings) o;
+        LookupResult b = (LookupResult) o;
 
         return Util.equals(key, b.key) && Util.equals(callablePoints, b.callablePoints);
     }

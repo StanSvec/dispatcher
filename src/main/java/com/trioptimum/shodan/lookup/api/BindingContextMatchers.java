@@ -1,6 +1,5 @@
 package com.trioptimum.shodan.lookup.api;
 
-import com.trioptimum.shodan.common.internal.Binding;
 import com.trioptimum.shodan.common.internal.CallablePoint;
 import com.trioptimum.shodan.lookup.internal.BindingContext;
 import com.trioptimum.shodan.lookup.service.LookupRule;

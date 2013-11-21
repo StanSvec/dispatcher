@@ -6,11 +6,12 @@ import com.trioptimum.shodan.dispatch.internal.DispatchByServices;
 import com.trioptimum.shodan.dispatch.service.Dispatch;
 import com.trioptimum.shodan.invocation.service.DispatchInvocation;
 import com.trioptimum.shodan.lookup.api.Key;
+import com.trioptimum.shodan.lookup.internal.LookupResult;
 import com.trioptimum.shodan.postproc.service.DispatchPostProcessor;
 
 public final class DispatchBuilder {
 
-	private Function<Key, Bindings> lookup;
+	private Function<Key, LookupResult> lookup;
 
     private Function<CallablePoint, Calling> callingFactory;
 
@@ -20,7 +21,7 @@ public final class DispatchBuilder {
 
 	private DispatchPostProcessor postProcessor;
 
-	public DispatchBuilder setLookup(Function<Key, Bindings> lookup) {
+	public DispatchBuilder setLookup(Function<Key, LookupResult> lookup) {
 		this.lookup = lookup;
 		return this;
 	}

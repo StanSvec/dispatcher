@@ -1,6 +1,6 @@
 package com.trioptimum.shodan.helper;
 
-import com.trioptimum.shodan.common.internal.Binding;
+import com.trioptimum.shodan.lookup.api.Binding;
 import com.trioptimum.shodan.common.internal.Call;
 import com.trioptimum.shodan.common.internal.CallablePoint;
 import com.trioptimum.shodan.common.internal.StrongCallablePoint;

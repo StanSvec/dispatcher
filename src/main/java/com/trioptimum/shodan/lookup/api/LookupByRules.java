@@ -2,6 +2,7 @@ package com.trioptimum.shodan.lookup.api;
 
 import com.trioptimum.shodan.common.internal.*;
 import com.trioptimum.shodan.lookup.internal.BindingContext;
+import com.trioptimum.shodan.lookup.internal.LookupResult;
 import com.trioptimum.shodan.lookup.service.LookupRule;
 import com.trioptimum.shodan.lookup.service.StoringLookup;
 import com.trioptimum.shodan.matcher.service.Matcher;
@@ -169,7 +170,7 @@ public final class LookupByRules implements StoringLookup {
 		}
 	}
 
-	public Bindings apply(Key key) {
+	public LookupResult apply(Key key) {
         List<LookupRule> rules = new ArrayList<LookupRule>();
 		List<CallablePoint> bs = new ArrayList<CallablePoint>();
 		readLock.lock();
@@ -197,7 +198,7 @@ public final class LookupByRules implements StoringLookup {
 			readLock.unlock();
 		}
 
-		return new Bindings(key, bs);
+		return new LookupResult(key, bs);
 	}
 	
 	private void expungeStaleEntries() {

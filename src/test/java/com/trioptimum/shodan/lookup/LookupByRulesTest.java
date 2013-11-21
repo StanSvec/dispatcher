@@ -5,6 +5,7 @@ import com.trioptimum.shodan.facade.DelegationTest;
 import com.trioptimum.shodan.helper.*;
 import com.trioptimum.shodan.lookup.api.Key;
 import com.trioptimum.shodan.lookup.api.LookupByRules;
+import com.trioptimum.shodan.lookup.internal.LookupResult;
 import com.trioptimum.shodan.lookup.service.LookupRule;
 import org.testng.annotations.Test;
 
@@ -38,18 +39,18 @@ public class LookupByRulesTest {
         sut.add(this);
     }
 
-    static CallablePoint getBinding(Bindings bindings) {
-        return bindings.getCallablePoints().get(0);
+    static CallablePoint getBinding(LookupResult lookupResult) {
+        return lookupResult.getCallablePoints().get(0);
     }
 
-    void assertBinding(Bindings bs) {
+    void assertBinding(LookupResult bs) {
         assertThat(bs.getCallablePoints()).hasSize(1);
         assertThat(bs.getKey()).isEqualTo(call);
         assertThat(getBinding(bs).getInstance()).isEqualTo(destination);
         assertThat(getBinding(bs).getMethod()).isEqualTo(TestDestination.integerArgVoidMethod());
     }
 
-    static void assertNoBinding(Bindings bs) {
+    static void assertNoBinding(LookupResult bs) {
         assertThat(bs.getCallablePoints()).isEmpty();
     }
 
@@ -67,7 +68,7 @@ public class LookupByRulesTest {
     public void destinationMatcher() {
         setup(bind(TestMatchers.integerArgVoidMatcher(destination)).done());
 
-        Bindings bs = sut.apply(call);
+        LookupResult bs = sut.apply(call);
 
         assertBinding(bs);
     }
@@ -76,7 +77,7 @@ public class LookupByRulesTest {
     public void destinationMatcherFalse() {
         setup(bind(none()).done());
 
-        Bindings bs = sut.apply(call);
+        LookupResult bs = sut.apply(call);
 
         assertNoBinding(bs);
     }
@@ -85,7 +86,7 @@ public class LookupByRulesTest {
     public void callMatcher() {
         setup(bind(TestMatchers.integerArgVoidMatcher(destination)).to(TestMatchers.integerArgVoidCallMatcher()).done());
 
-        Bindings bs = sut.apply(call);
+        LookupResult bs = sut.apply(call);
 
         assertBinding(bs);
     }
@@ -94,7 +95,7 @@ public class LookupByRulesTest {
     public void callMatcherFalse() {
         setup(bind(TestMatchers.integerArgVoidMatcher(destination)).to(none()).done());
 
-        Bindings bs = sut.apply(call);
+        LookupResult bs = sut.apply(call);
 
         assertNoBinding(bs);
     }
@@ -103,7 +104,7 @@ public class LookupByRulesTest {
     public void bindingMatcher() {
         setup(bind(TestMatchers.integerArgVoidMatcher(destination)).when(binding(TestMatchers.integerArgVoidBindingMatcher(destination))).done());
 
-        Bindings bs = sut.apply(call);
+        LookupResult bs = sut.apply(call);
 
         assertBinding(bs);
     }
@@ -112,7 +113,7 @@ public class LookupByRulesTest {
     public void bindingMatcherFalse() {
         setup(bind(TestMatchers.integerArgVoidMatcher(destination)).when(binding(none())).done());
 
-        Bindings bs = sut.apply(call);
+        LookupResult bs = sut.apply(call);
 
         assertNoBinding(bs);
     }

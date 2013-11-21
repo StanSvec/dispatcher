@@ -1,6 +1,6 @@
 package com.trioptimum.shodan.lookup.service;
 
-import com.trioptimum.shodan.common.internal.Bindings;
+import com.trioptimum.shodan.lookup.internal.LookupResult;
 import com.trioptimum.shodan.common.service.Function;
 import com.trioptimum.shodan.lookup.api.Key;
 
@@ -11,5 +11,5 @@ import com.trioptimum.shodan.lookup.api.Key;
  * Time: 13:03
  * To change this template use File | Settings | File Templates.
  */
-public interface Lookup extends Function<Key, Bindings> {
+public interface Lookup extends Function<Key, LookupResult> {
 }

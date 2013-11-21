@@ -2,12 +2,13 @@ package com.trioptimum.shodan.dispatch.service;
 
 import com.trioptimum.shodan.common.internal.*;
 import com.trioptimum.shodan.lookup.api.Key;
+import com.trioptimum.shodan.lookup.internal.LookupResult;
 
 import java.util.*;
 
 public abstract class DispatchOrchestration implements Dispatch {
 
-    protected abstract Bindings find(Key key);
+    protected abstract LookupResult find(Key key);
 
     protected abstract Calling createCalling(CallablePoint callablePoint);
 

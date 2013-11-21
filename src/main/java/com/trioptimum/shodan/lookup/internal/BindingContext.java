@@ -1,6 +1,6 @@
 package com.trioptimum.shodan.lookup.internal;
 
-import com.trioptimum.shodan.common.internal.Binding;
+import com.trioptimum.shodan.lookup.api.Binding;
 import com.trioptimum.shodan.common.internal.CallablePoint;
 import com.trioptimum.shodan.lookup.service.LookupRule;
 
@@ -23,10 +23,10 @@ public final class BindingContext {
 
     private final List<CallablePoint> bindings;
 
-    public BindingContext(Binding binding, List<LookupRule> previouslyMatchedRules, List<CallablePoint> bindings) {
+    public BindingContext(Binding binding, List<LookupRule> previouslyMatchedRules, List<CallablePoint> callablePoints) {
         this.binding = binding;
         this.previouslyMatchedRules = Collections.unmodifiableList(new ArrayList<LookupRule>(previouslyMatchedRules));
-        this.bindings = Collections.unmodifiableList(new ArrayList<CallablePoint>(bindings));
+        this.bindings = Collections.unmodifiableList(new ArrayList<CallablePoint>(callablePoints));
     }
 
     public Binding getBinding() {

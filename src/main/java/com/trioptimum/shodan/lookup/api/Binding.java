@@ -1,9 +1,10 @@
-package com.trioptimum.shodan.common.internal;
+package com.trioptimum.shodan.lookup.api;
 
-import com.trioptimum.shodan.lookup.api.Key;
+import com.trioptimum.shodan.common.internal.CallablePoint;
+import com.trioptimum.shodan.common.internal.Util;
 
 /**
- * The callablePoint of a key to a callable point.
+ * The binding of a key to a callable point.
  *
  * @author Stan Svec
  * @since 0.1

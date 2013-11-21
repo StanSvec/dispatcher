@@ -7,6 +7,7 @@ import com.trioptimum.shodan.extraction.internal.SimpleReturnExtraction;
 import com.trioptimum.shodan.invocation.api.InterceptableDispatchInvocation;
 import com.trioptimum.shodan.invocation.service.DispatchInvocation;
 import com.trioptimum.shodan.lookup.api.Key;
+import com.trioptimum.shodan.lookup.internal.LookupResult;
 import com.trioptimum.shodan.lookup.internal.NullLookup;
 import com.trioptimum.shodan.postproc.internal.NullDispatchPostProcessor;
 import com.trioptimum.shodan.postproc.service.DispatchPostProcessor;
@@ -15,7 +16,7 @@ import java.util.Collection;
 
 public final class DispatchByServices extends DispatchOrchestration {
 
-    private final Function<Key, Bindings> lookup;
+    private final Function<Key, LookupResult> lookup;
 
     private final Function<CallablePoint, Calling> callingFactory;
 
@@ -25,7 +26,7 @@ public final class DispatchByServices extends DispatchOrchestration {
 
     private final DispatchPostProcessor postProcessor;
 
-    public DispatchByServices(Function<Key, Bindings> lookup, Function<CallablePoint, Calling> callingFactory, DispatchInvocation invocation,
+    public DispatchByServices(Function<Key, LookupResult> lookup, Function<CallablePoint, Calling> callingFactory, DispatchInvocation invocation,
                               Function<DispatchResult, Return> returnExtraction, DispatchPostProcessor postProcessor) {
         this.lookup = 		    ((lookup != null) ? lookup : new NullLookup());
         this.callingFactory =   ((callingFactory != null) ? callingFactory : new ReflectiveCallingFactory());
@@ -34,7 +35,7 @@ public final class DispatchByServices extends DispatchOrchestration {
         this.postProcessor =    ((postProcessor != null) ? postProcessor : new NullDispatchPostProcessor());
     }
 
-    public Bindings find(Key key) {
+    public LookupResult find(Key key) {
         return lookup.apply(key);
     }
 

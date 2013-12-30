@@ -1,6 +1,6 @@
 package com.trioptimum.shodan.extraction.service;
 
-import com.trioptimum.shodan.common.internal.DispatchResult;
+import com.trioptimum.shodan.common.internal.MultiCallingResult;
 import com.trioptimum.shodan.common.internal.Return;
 import com.trioptimum.shodan.common.service.Function;
 
@@ -11,5 +11,5 @@ import com.trioptimum.shodan.common.service.Function;
  * Time: 13:18
  * To change this template use File | Settings | File Templates.
  */
-public interface ReturnExtraction extends Function<DispatchResult, Return> {
+public interface ReturnExtraction extends Function<MultiCallingResult, Return> {
 }

@@ -5,7 +5,7 @@ import com.trioptimum.shodan.intercept.service.Interception;
 
 public final class NullInterception implements Interception {
 
-    public Object intercept(DispatchContext context, ParameterizedCalling callablePoint) throws Exception {
+    public Object intercept(InterceptionContext context, ParameterizedCalling callablePoint) throws Exception {
         return callablePoint.call();
     }
 }

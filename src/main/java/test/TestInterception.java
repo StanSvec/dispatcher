@@ -1,7 +1,7 @@
 package test;
 
 import com.trioptimum.shodan.common.internal.ParameterizedCalling;
-import com.trioptimum.shodan.intercept.internal.DispatchContext;
+import com.trioptimum.shodan.intercept.internal.InterceptionContext;
 import com.trioptimum.shodan.intercept.service.Interception;
 
 /**
@@ -9,7 +9,7 @@ import com.trioptimum.shodan.intercept.service.Interception;
  */
 public class TestInterception implements Interception {
 
-    public Object intercept(DispatchContext context, ParameterizedCalling callablePoint) throws Exception {
+    public Object intercept(InterceptionContext context, ParameterizedCalling callablePoint) throws Exception {
         System.out.println("intercept before");
         return callablePoint.call("value changed");
     }

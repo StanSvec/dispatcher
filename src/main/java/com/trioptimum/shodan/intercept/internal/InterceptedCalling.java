@@ -12,33 +12,33 @@ public final class InterceptedCalling implements ParameterizedCalling {
 
 	private final Interception interception;
 	
-	private final DispatchContext context;
+	private final InterceptionContext context;
 
-    private final ParameterizedCalling callablePoint;
+    private final ParameterizedCalling calling;
 
-    public InterceptedCalling(Interception interception, DispatchContext context, ParameterizedCalling callablePoint) {
+    public InterceptedCalling(Interception interception, InterceptionContext context, ParameterizedCalling calling) {
 		this.interception = interception;
 		this.context = context;
-        this.callablePoint = callablePoint;
+        this.calling = calling;
     }
 
     public Method getMethod() {
-        return callablePoint.getMethod();
+        return calling.getMethod();
     }
 
     public Object getInstance() {
-        return callablePoint.getInstance();
+        return calling.getInstance();
     }
 
     public List<Object> getParameters() {
-        return callablePoint.getParameters();
+        return calling.getParameters();
     }
 
 	public Object call() throws Exception {
-		return interception.intercept(context, callablePoint);
+		return interception.intercept(context, calling);
 	}
 
     public Object call(Object... params) throws Exception {
-        return interception.intercept(context, new DelegatingParameterizedCalling(callablePoint, params != null ? Arrays.asList(params) : null));
+        return interception.intercept(context, new DelegatingParameterizedCalling(calling, params != null ? Arrays.asList(params) : null));
     }
 }

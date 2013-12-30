@@ -6,18 +6,18 @@ public final class Return {
 
 	private final Exception exception;
 
-	public Return(Object value) {
-		this(value, null);
-	}
+    private Return(Object value, Exception exception) {
+        this.value = value;
+        this.exception = exception;
+    }
 
-	public Return(Exception exception) {
-		this(null, exception);
-	}
+    public static Return create(Object value) {
+        return new Return(value, null);
+    }
 
-	private Return(Object value, Exception exception) {
-		this.value = value;
-		this.exception = exception;
-	}
+    public static Return createExceptional(Exception exception) {
+        return new Return(null, exception);
+    }
 
 	public Object getValue() {
 		return value;

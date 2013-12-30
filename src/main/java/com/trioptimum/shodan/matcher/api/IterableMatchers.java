@@ -178,7 +178,7 @@ public class IterableMatchers {
             return matchesRec(-1, tested);
         }
 
-        public boolean matchesRec(int from, Iterable<? extends T> tested) {
+        boolean matchesRec(int from, Iterable<? extends T> tested) {
             int min = Integer.MAX_VALUE, max = -1, last = -1, size = size(tested);
             Set<Integer> findPos = new HashSet<Integer>(subjects.size());
             outer: for (Matcher<? super T> next : subjects) {
@@ -205,7 +205,7 @@ public class IterableMatchers {
             return true;
         }
 
-        private static int size(Iterable<?> objects) {
+        static int size(Iterable<?> objects) {
             int size = 0;
             for (Iterator<?> it = objects.iterator(); it.hasNext(); it.next()) {
                 size++;

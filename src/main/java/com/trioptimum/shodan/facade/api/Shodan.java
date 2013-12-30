@@ -8,7 +8,7 @@ import com.trioptimum.shodan.facade.internal.DefaultConfiguration;
 import com.trioptimum.shodan.facade.service.Delegation;
 import com.trioptimum.shodan.facade.service.Settings;
 import com.trioptimum.shodan.intercept.api.InterceptionByRule;
-import com.trioptimum.shodan.invocation.api.InterceptableDispatchInvocation;
+import com.trioptimum.shodan.intercept.api.InterceptableMultiCalling;
 import com.trioptimum.shodan.lookup.api.LookupByRules;
 import com.trioptimum.shodan.lookup.service.StoringLookup;
 
@@ -36,7 +36,7 @@ public class Shodan implements Delegation {
         this.storingLookup = new LookupByRules(conf.getLookupRules());
         this.delegateFactory = new DispatchDelegateFactory(
                 new DispatchBuilder().setLookup(storingLookup)
-                                     .setInvocation(new InterceptableDispatchInvocation(new InterceptionByRule(conf.getInterceptionRules())))
+                                     .setInvocation(new InterceptableMultiCalling(new InterceptionByRule(conf.getInterceptionRules())))
                                      .build());
     }
 

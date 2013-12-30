@@ -3,6 +3,8 @@ package com.trioptimum.shodan.common.service;
 import java.util.Collection;
 
 /**
+ * //TODO remove type T
+ *
  * Created with IntelliJ IDEA.
  * User: Turtles
  * Date: 24.11.12

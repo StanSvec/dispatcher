@@ -12,11 +12,11 @@ public abstract class DispatchOrchestration implements Dispatch {
 
     protected abstract Calling createCalling(CallablePoint callablePoint);
 
-    protected abstract DispatchResult invokeAll(Collection<? extends ParameterizedCalling> bindings);
+    protected abstract MultiCallingResult invokeAll(Collection<? extends ParameterizedCalling> bindings);
 	
-	protected abstract Return extractReturn(DispatchResult dispatchResult);
+	protected abstract Return extractReturn(MultiCallingResult multiCallingResult);
 	
-	protected void postProcess(DispatchResult dispatchResult, Return dispatchReturn) { /* empty */ }
+	protected void postProcess(MultiCallingResult multiCallingResult, Return dispatchReturn) { /* empty */ }
 	
 	protected Object doReturn(Return ret) throws Exception {
 		if (ret.isExceptional()) {
@@ -37,7 +37,7 @@ public abstract class DispatchOrchestration implements Dispatch {
     }
 
     public Object dispatchFound(Collection<? extends ParameterizedCalling> callings) throws Exception {
-        DispatchResult res = invokeAll(callings);
+        MultiCallingResult res = invokeAll(callings);
         Return ret = extractReturn(res);
         postProcess(res, ret);
         return doReturn(ret);

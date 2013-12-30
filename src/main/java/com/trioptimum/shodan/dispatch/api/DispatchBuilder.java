@@ -4,7 +4,7 @@ import com.trioptimum.shodan.common.internal.*;
 import com.trioptimum.shodan.common.service.Function;
 import com.trioptimum.shodan.dispatch.internal.DispatchByServices;
 import com.trioptimum.shodan.dispatch.service.Dispatch;
-import com.trioptimum.shodan.invocation.service.DispatchInvocation;
+import com.trioptimum.shodan.common.internal.MultiCalling;
 import com.trioptimum.shodan.lookup.api.Key;
 import com.trioptimum.shodan.lookup.internal.LookupResult;
 import com.trioptimum.shodan.postproc.service.DispatchPostProcessor;
@@ -15,9 +15,9 @@ public final class DispatchBuilder {
 
     private Function<CallablePoint, Calling> callingFactory;
 
-	private DispatchInvocation invocation;
+	private MultiCalling invocation;
 
-	private Function<DispatchResult, Return> returnExtraction;
+	private Function<MultiCallingResult, Return> returnExtraction;
 
 	private DispatchPostProcessor postProcessor;
 
@@ -31,12 +31,12 @@ public final class DispatchBuilder {
         return this;
     }
 
-	public DispatchBuilder setInvocation(DispatchInvocation invocation) {
+	public DispatchBuilder setInvocation(MultiCalling invocation) {
 		this.invocation = invocation;
 		return this;
 	}
 
-	public DispatchBuilder setReturnExtraction(Function<DispatchResult, Return> returnExtraction) {
+	public DispatchBuilder setReturnExtraction(Function<MultiCallingResult, Return> returnExtraction) {
 		this.returnExtraction = returnExtraction;
 		return this;
 	}

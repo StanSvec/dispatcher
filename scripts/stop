@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+kill $(ps aux | grep '[s]hodan' | awk '{print $2}')
+mkdir -p bin/previous
+mv bin/*.jar bin/previous

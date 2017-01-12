@@ -25,12 +25,10 @@ os: linux
 files:
   - source: target/shodan-0.1.jar
     destination: /home/ec2-user/shodan/bin
-  - source: scripts
-    destination: /home/ec2-user/shodan/
 
 hooks:
 # During the ApplicationInstall deployment lifecycle event, run the commands
 #   in the script specified in "location".
   ApplicationStart:
-    - location: scripts/start
-      timeout: 60
+    - location: scripts/start.sh
+      timeout: 10

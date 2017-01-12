@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-touch picma
+nohup java -jar /home/ec2-user/shodan/bin/shodan-0.1.jar &

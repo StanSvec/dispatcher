@@ -7,9 +7,13 @@ import java.util.concurrent.TimeUnit;
  */
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         for (;;) {
-            TimeUnit.SECONDS.sleep(2);
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                System.out.println("jebat");
+            }
             System.out.println("matej");
         }
     }

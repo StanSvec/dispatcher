@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
-kill $(ps aux | grep '[s]hodan' | awk '{print $2}')
-mkdir -p bin/previous
-mv bin/*.jar bin/previous
+PID=$(ps aux | grep '[s]hodan' | awk '{print $2}')
+kill $PID
+wait $PID
+SHODAN_HOME=/home/ec2-user/shodan
+mkdir -p $SHODAN_HOME/bin/previous
+mv $SHODAN_HOME/bin/*.jar $SHODAN_HOME/bin/previous

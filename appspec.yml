@@ -59,11 +59,11 @@ hooks:
 #   revision's file bundle.
   ApplicationStop:
     - location: scripts/stop
-      timeout: 2
+      timeout: 5
       runas: ec2-user
 # During the ApplicationInstall deployment lifecycle event, run the commands
 #   in the script specified in "location".
   ApplicationStart:
     - location: scripts/start
-      timeout: 10
+      timeout: 5
       runas: ec2-user

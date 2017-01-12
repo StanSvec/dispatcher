@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
-PID=$(ps aux | grep '[s]hodan' | awk '{print $2}')
-kill $PID
-wait $PID
-SHODAN_HOME=/home/ec2-user/shodan
-mkdir -p $SHODAN_HOME/bin/previous
-mv $SHODAN_HOME/bin/*.jar $SHODAN_HOME/bin/previous
+
+# STOP APPLICATION
+APP=[s]hodan
+# Generic code below which can be reused (copy-paste)
+PID=$(ps aux | grep ${APP} | awk '{print $2}')
+if [ ! -z "${PID}" ]; then
+  kill ${PID}
+  while kill -0 ${PID} 2> /dev/null; do sleep 1; done;
+fi
+
+# BACKUP JAR FILE
+APP_HOME=/home/ec2-user/shodan
+mkdir -p ${APP_HOME}/bin/previous
+mv ${APP_HOME}/bin/*.jar ${APP_HOME}/bin/previous

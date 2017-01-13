@@ -9,7 +9,9 @@ public class Main {
 
     public static void main(String[] args) {
         new Thread(Main::muckuj).start();
+        Runtime.getRuntime().addShutdownHook(new Thread(Main::sleep));
     }
+
 
     private static void muckuj() {
         for (;;) {
@@ -20,5 +22,14 @@ public class Main {
             }
             System.out.println("matej");
         }
+    }
+
+    private static void sleep() {
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                System.out.println("jebat");
+            }
+
     }
 }

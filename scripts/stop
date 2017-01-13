@@ -4,9 +4,11 @@
 APP=[s]hodan
 # Generic code below which can be reused (copy-paste)
 PID=$(ps aux | grep ${APP} | awk '{print $2}')
+TRIES=0
 if [ ! -z "${PID}" ]; then
   kill ${PID}
-  while kill -0 ${PID} 2> /dev/null; do sleep 1; done;
+  while [ ${TRIES} -le 4 ] && kill -0 ${PID} 2> /dev/null; do ((TRIES++)) && sleep 0.5; done; # sleep unless killed or too many tries
+  kill -9 ${PID} 2> /dev/null # kill it hardly in case it hangs
 fi
 
 # BACKUP JAR FILE

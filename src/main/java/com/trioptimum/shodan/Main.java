@@ -8,6 +8,10 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 
     public static void main(String[] args) {
+        new Thread(Main::muckuj).start();
+    }
+
+    private static void muckuj() {
         for (;;) {
             try {
                 TimeUnit.SECONDS.sleep(2);

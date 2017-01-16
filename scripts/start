@@ -1,2 +1,29 @@
 #!/usr/bin/env bash
+
+# RESOLVE ENVIRONMENT
+# Get value in `Environment` EC2 tag for the instance
+ENV_TAG_NAME=Environment
+INSTANCE_ID=$(ec2-metadata --instance-id | cut -f2 -d " ")
+REGION=eu-west-1
+ENV_TAG_VALUE=$(aws ec2 describe-tags --filters "Name=resource-id,Values=$INSTANCE_ID" "Name=key,Values=$ENV_TAG_NAME" --region=$REGION --output=text | cut -f5)
+
+# Resolve the environment based on the Environment tag value
+ENV=
+case "$ENV_TAG_VALUE" in
+  qa)
+    ENV=qa
+    ;;
+  prd|prod|production)
+    ENV=prd
+    ;;
+esac
+
+if [ -z $ENV_TAG_VALUE ]; then
+  >&2 echo 'ERROR Cannot resolve environment! Is Environment EC2 tag set correctly for the instance?'
+  exit 1
+fi
+
+echo $ENV_TAG_VALUE
+
+# START APPLICATION
 nohup java -jar /home/ec2-user/shodan/bin/shodan-*.jar > /dev/null 2> /dev/null < /dev/null &
